@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="https://framerusercontent.com/images/crQk5UzfRd9W9n54FdrUY2WUTU.png">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://bencyshamiliwedskavin.vercel.app//images/5-img.jpg">
+  <meta property="og:image" content="https://bencyswedskavin.vercel.app//images/5-img.jpg">
 
 
 
@@ -5632,24 +5632,36 @@ a[href="https://rzp.io/rzp/whimsical"] {
  <!-- groom names -->
 
 <script>
-const updateNames = () => {
+const fixNames = () => {
 
-  const first = document.querySelector('[data-framer-name="Abhishek"] span[style*="white-space"]');
-  const second = document.querySelector('[data-framer-name="Kanika"] span[style*="white-space"]');
+  const firstContainer = document.querySelector('[data-framer-name="Abhishek"] .framer-text');
+  const secondContainer = document.querySelector('[data-framer-name="Kanika"] .framer-text');
+  const wedsContainer = document.querySelector('[data-framer-name="weds"] .framer-text');
 
-  if (first && first.innerText !== "Bency") {
-    first.innerHTML = "Bency";
+  if (firstContainer && secondContainer && wedsContainer) {
+
+    // Remove all inner spans and set plain text
+    firstContainer.innerHTML = "Bency";
+    secondContainer.innerHTML = "Kavin";
+    wedsContainer.innerHTML = "weds"; // or ❤️ if you want
+
+    return true;
   }
 
-  if (second && second.innerText !== "Kavin") {
-    second.innerHTML = "Kavin";
-  }
-
+  return false;
 };
 
-// run continuously (Framer fix)
-setInterval(updateNames, 500);
-</script>
+// Wait until Framer finishes rendering
+const observer = new MutationObserver(() => {
+  if (fixNames()) {
+    observer.disconnect();
+  }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+</script>  
+
+
 
 <script>
 const replaceNames = () => {
@@ -5691,31 +5703,6 @@ setInterval(replaceNames, 500);
 </script> 
 
 
-
-<script>
-const createAnimatedText = (text) => {
-  return text.split("").map((char, i) => {
-    return `<span style="
-      display:inline-block;
-      opacity:0;
-      transform:translateY(20px);
-      animation:fadeUp 0.5s ease forwards;
-      animation-delay:${i * 0.08}s;
-    ">${char}</span>`;
-  }).join("");
-};
-
-const applyNames = () => {
-  const first = document.querySelector('[data-framer-name="Abhishek"] span[style*="white-space"]');
-  const second = document.querySelector('[data-framer-name="Kanika"] span[style*="white-space"]');
-
-  if (first) first.innerHTML = createAnimatedText("Bency Shamili");
-  if (second) second.innerHTML = createAnimatedText("Kavin");
-};
-
-// run after render
-setTimeout(applyNames, 1000);
-</script>
 
 <style>
 @keyframes fadeUp {
