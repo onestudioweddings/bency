@@ -5654,6 +5654,34 @@ const updateNames = () => {
 setInterval(updateNames, 500);
 </script>
 
+<!-- animation -->
+<script>
+const fixNames = () => {
+
+  const first = document.querySelector('[data-framer-name="Abhishek"] .framer-text');
+  const second = document.querySelector('[data-framer-name="Kanika"] .framer-text');
+
+  if (!first || !second) return false;
+
+  // Only update if still old content (prevents loops)
+  if (first.innerText.includes("Joshua") || first.querySelector("span")) {
+    first.innerHTML = "Bency";
+  }
+
+  if (second.innerText.includes("Vanessa") || second.querySelector("span")) {
+    second.innerHTML = "Kavin";
+  }
+
+  return true;
+};
+
+// Run repeatedly until replaced (no flicker)
+const interval = setInterval(() => {
+  if (fixNames()) {
+    clearInterval(interval);
+  }
+}, 50);
+</script>
 
 
 <script>
@@ -6678,7 +6706,7 @@ setTimeout(() => {
                               style="display:inline-block;opacity:0.001;filter:blur(10px);transform:translateX(0px) translateY(10px) scale(0) rotate(0deg) skewX(0deg) skewY(0deg)">n</span><span
                               style="display:inline-block;opacity:0.001;filter:blur(10px);transform:translateX(0px) translateY(10px) scale(0) rotate(0deg) skewX(0deg) skewY(0deg)">c</span><span
                               style="display:inline-block;opacity:0.001;filter:blur(10px);transform:translateX(0px) translateY(10px) scale(0) rotate(0deg) skewX(0deg) skewY(0deg)">y</span><span
-                              style="display:inline-block;opacity:0.001;filter:blur(10px);transform:translateX(0px) translateY(10px) scale(0) rotate(0deg) skewX(0deg) skewY(0deg)"></span></span>
+                              style="display:inline-block;opacity:0.001;filter:blur(10px);transform:translateX(0px) translateY(10px) scale(0) rotate(0deg) skewX(0deg) skewY(0deg)">a</span></span>
                         </p>
                       </div>
                       <div class="framer-1on53wh" data-framer-name="weds" data-framer-component-type="RichTextContainer"
