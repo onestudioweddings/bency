@@ -37,7 +37,7 @@
   <link rel="apple-touch-icon" href="https://framerusercontent.com/images/crQk5UzfRd9W9n54FdrUY2WUTU.png">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://bencywedkavin.vercel.app/images/5-img.jpg">
+  <meta property="og:image" content="https://bencywedskavin.vercel.app/images/5-img.jpg">
 
 
 
@@ -5633,6 +5633,8 @@ a[href="https://rzp.io/rzp/whimsical"] {
 
  <!-- groom names -->
 
+ 
+
 <script>
 const createAnimatedText = (text) => {
   return text.split("").map((char, i) => {
@@ -5655,7 +5657,6 @@ const applyNames = () => {
 };
 
 // run after render
-setTimeout(applyNames, 1000);
 </script>
 
 <style>
@@ -5669,42 +5670,57 @@ setTimeout(applyNames, 1000);
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  const first = document.querySelector('[data-framer-name="Aaditya"] .framer-text');
-  const second = document.querySelector('[data-framer-name="Veera"] .framer-text');
+  const replaceText = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.includes("Thomas and Mary")) {
+        el.textContent = "Mrs. Annie Christi and Mr. Sundar L";
+      }
+    });
+  };
 
-  if (first) first.textContent = "Bency";
-  if (second) second.textContent = "Kavin";
+  // Run immediately
+  replaceText();
 
-}, 1000);
-</script>
-
-
-<script>
-setTimeout(() => {
-
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("Thomas and Mary")) {
-      el.textContent = "Mrs. Annie Christi and Mr. Sundar L";
-    }
+  // Watch for Framer DOM updates
+  const observer = new MutationObserver(() => {
+    replaceText();
   });
 
-}, 1000);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 
 <!-- replace son daughter-->
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.trim() === "At the marriage of their son") {
-      el.textContent = "At the marriage of their daughter";
-    }
+  const replaceText = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.trim() === "At the marriage of their son") {
+        el.textContent = "At the marriage of their daughter";
+      }
+    });
+  };
+
+  // Run immediately
+  replaceText();
+
+  // Watch for Framer re-renders
+  const observer = new MutationObserver(replaceText);
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 
@@ -9917,6 +9933,5 @@ document.addEventListener("keydown", function (e) {
   <!-- Start of bodyEnd -->
 
   <!-- End of bodyEnd -->
-</body>
 
 </html>
