@@ -6038,18 +6038,29 @@ a.framer-styles-preset-thf6wm {
 <script>
 (function () {
 
-  const hideAttire = () => {
-    const el = document.querySelector('[data-framer-name="Hashtag"] .framer-text');
-    if (el && el.textContent.trim() === "Attire") {
-      const section = el.closest('.framer-18k7y2c-container');
-      if (section) section.style.display = "none";
+  const hideSection = () => {
+
+    const section = document.querySelector('.framer-18k7y2c-container');
+    if (!section) return;
+
+    // Double check it's really the Attire section
+    const title = section.querySelector('[data-framer-name="Hashtag"] .framer-text');
+
+    if (title && title.textContent.trim() === "Attire") {
+      section.style.display = "none";
     }
+
   };
 
-  hideAttire();
+  // Run immediately
+  hideSection();
 
-  const observer = new MutationObserver(hideAttire);
-  observer.observe(document.body, { childList: true, subtree: true });
+  // Watch for Framer re-render
+  const observer = new MutationObserver(hideSection);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 
 })();
 </script>
