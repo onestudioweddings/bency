@@ -5711,6 +5711,18 @@ setTimeout(() => {
 <script>
 setTimeout(() => {
 
+  const el = document.querySelector('[data-framer-name="Text 1"] .framer-text');
+  if (el) {
+    el.textContent = "Son of";
+  }
+
+}, 1000);
+</script>
+
+
+<script>
+setTimeout(() => {
+
   document.querySelectorAll('.framer-text').forEach(el => {
     if (el.textContent.includes("Mirko Rastovic")) {
       el.textContent = el.textContent.replace("Mirko Rastovic", "GanapathiKumar");
@@ -5805,18 +5817,6 @@ setTimeout(() => {
 setTimeout(() => {
 
   document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("Thomas and Mary")) {
-      el.textContent = "Mr. and Mrs. Justin and Illeana";
-    }
-  });
-
-}, 1000);
-</script>
-
-<script>
-setTimeout(() => {
-
-  document.querySelectorAll('.framer-text').forEach(el => {
     if (el.textContent.includes("Mirko Rastovic")) {
       el.textContent = el.textContent.replace("Mirko Rastovic", "John Mario");
     }
@@ -5840,7 +5840,7 @@ setTimeout(() => {
   
   if (img) {
     const link = document.createElement("a");
-    link.href = "https://maps.google.com/";
+    link.href = "https://maps.app.goo.gl/6DCsqukGZu6qpDmx6";
     link.target = "_blank";
 
     img.parentNode.insertBefore(link, img);
@@ -5856,7 +5856,7 @@ setTimeout(() => {
 
   const link = document.querySelector('[data-framer-name="WhatsApp Icon"]');
   if (link) {
-    link.href = "https://google.com";
+    link.href = "https://wa.me/17057721535";
   }
 
 }, 1000);
@@ -5920,7 +5920,7 @@ setTimeout(() => {
 
   const link = document.querySelector('[data-framer-name="Instagram Icon"]');
   if (link) {
-    link.href = "https://www.instagram.com";
+    link.href = "https://www.instagram.com/kavin_n_g/";
   }
 
 }, 1000);
@@ -5970,6 +5970,72 @@ setTimeout(() => {
   });
 
 }, 1000);
+</script>
+
+
+
+<!-- countdown timer -->
+<script>
+(function () {
+
+  const targetDate = new Date("May 27, 2026 15:00:00").getTime();
+
+  function format(diff) {
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    return (
+      String(d).padStart(2, "0") + ":" +
+      String(h).padStart(2, "0") + ":" +
+      String(m).padStart(2, "0") + ":" +
+      String(s).padStart(2, "0")
+    );
+  }
+
+  function startCounter(el) {
+
+    if (el.dataset.running) return; // prevent duplicate
+    el.dataset.running = "true";
+
+    function update() {
+      const now = Date.now();
+      const diff = targetDate - now;
+      el.innerText = format(diff > 0 ? diff : 0);
+    }
+
+    update();
+    setInterval(update, 1000);
+  }
+
+  function findCounter() {
+    document.querySelectorAll("p").forEach(p => {
+
+      const text = p.innerText.trim();
+
+      // 🔥 flexible match
+      if (/^\d{2}:\d{2}:\d{2}:\d{2}$/.test(text) || text.includes("00:00")) {
+        startCounter(p);
+      }
+
+    });
+  }
+
+  // run multiple times
+  setTimeout(findCounter, 500);
+  setTimeout(findCounter, 1500);
+  setTimeout(findCounter, 3000);
+
+  // observe dynamic rendering
+  const observer = new MutationObserver(findCounter);
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 
