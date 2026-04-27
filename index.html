@@ -5633,31 +5633,85 @@ a[href="https://rzp.io/rzp/whimsical"] {
 
  <!-- groom names -->
 
- 
 
-<script>
-const createAnimatedText = (text) => {
-  return text.split("").map((char, i) => {
-    return `<span style="
-      display:inline-block;
-      opacity:0;
-      transform:translateY(20px);
-      animation:fadeUp 0.5s ease forwards;
-      animation-delay:${i * 0.08}s;
-    ">${char}</span>`;
-  }).join("");
-};
+ <script>
+(function () {
 
-const applyNames = () => {
-  const first = document.querySelector('[data-framer-name="Abhishek"] span[style*="white-space"]');
-  const second = document.querySelector('[data-framer-name="Kanika"] span[style*="white-space"]');
+  const updateNames = () => {
 
-  if (first) first.innerHTML = createAnimatedText("Bency");
-  if (second) second.innerHTML = createAnimatedText("Kavin");
-};
+    const container = document.querySelector('.framer-3jxt2c-container');
+    if (!container) return;
 
-// run after render
+    // First name (Joshua → Bency)
+    const first = container.querySelector('[data-framer-name="Abhishek"] .framer-text');
+    if (first && first.innerText !== "Bency") {
+      first.innerHTML = "Bency"; // removes all animated spans
+    }
+
+    // Second name (Vanessa → Kavin)
+    const second = container.querySelector('[data-framer-name="Kanika"] .framer-text');
+    if (second && second.innerText !== "Kavin") {
+      second.innerHTML = "Kavin"; // removes animation
+    }
+
+    // Optional: clean "weds" (remove animation too)
+    const weds = container.querySelector('[data-framer-name="weds"] .framer-text');
+    if (weds && weds.innerText !== "weds") {
+      weds.innerHTML = "weds";
+    }
+
+  };
+
+  // Run immediately
+  updateNames();
+
+  // Watch for Framer re-render
+  const observer = new MutationObserver(updateNames);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
+
+
+ <script>
+(function () {
+
+  const updateNames = () => {
+
+    const container = document.querySelector('.framer-1c04gtd-container');
+    if (!container) return;
+
+    // Joshua → Bency
+    const first = container.querySelector('[data-framer-name="Aaditya"] .framer-text');
+    if (first && first.textContent !== "Bency") {
+      first.textContent = "Bency";
+    }
+
+    // Vanessa → Kavin
+    const second = container.querySelector('[data-framer-name="Veera"] .framer-text');
+    if (second && second.textContent !== "Kavin") {
+      second.textContent = "Kavin";
+    }
+
+  };
+
+  // Run immediately
+  updateNames();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(updateNames);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
+</script>
+
+
 
 <style>
 @keyframes fadeUp {
@@ -5725,120 +5779,193 @@ const applyNames = () => {
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  const el = document.querySelector('[data-framer-name="Text 1"] .framer-text');
-  if (el) {
-    el.textContent = "Son of";
-  }
+  const replaceText = () => {
+    const el = document.querySelector('[data-framer-name="Text 1"] .framer-text');
+    if (el && el.textContent !== "Son of") {
+      el.textContent = "Son of";
+    }
+  };
 
-}, 1000);
+  // Run immediately
+  replaceText();
+
+  // Watch Framer updates
+  const observer = new MutationObserver(replaceText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("Mirko Rastovic")) {
-      el.textContent = el.textContent.replace("Mirko Rastovic", "GanapathiKumar");
-    }
+  const replaceText = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.includes("Mirko Rastovic")) {
+        el.textContent = el.textContent.replace("Mirko Rastovic", "GanapathiKumar");
+      }
+    });
+  };
+
+  // Run immediately
+  replaceText();
+
+  // Watch for Framer DOM updates
+  const observer = new MutationObserver(replaceText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 <!-- hide events -->
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    const text = el.textContent.trim();
+  const hideEvents = () => {
 
-    if (
-      text === "Welcome Party" ||
-      text === "Opera Night" ||
-      text === "Cocktail"
-    ) {
-      // hide entire card
-      let card = el.closest('[data-framer-name="Variant 1"]');
-      if (card) {
-        card.style.display = "none";
+    const eventsToHide = ["Welcome Party", "Opera Night", "Cocktail"];
+
+    document.querySelectorAll('.framer-text').forEach(el => {
+      const text = el.textContent.trim();
+
+      if (eventsToHide.includes(text)) {
+        const card = el.closest('[data-framer-name="Variant 1"]');
+        if (card && card.style.display !== "none") {
+          card.style.display = "none";
+        }
       }
-    }
+    });
+
+  };
+
+  // Run immediately
+  hideEvents();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(hideEvents);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 
 
 <!-- Update event details -->
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('[data-framer-name="Variant 1"]').forEach(card => {
+  const updateEvents = () => {
 
-    const eventNameEl = card.querySelector('[data-framer-name="Event name"] .framer-text');
-    if (!eventNameEl) return;
+    document.querySelectorAll('[data-framer-name="Variant 1"]').forEach(card => {
 
-    const eventName = eventNameEl.textContent.trim();
+      const eventNameEl = card.querySelector('[data-framer-name="Event name"] .framer-text');
+      if (!eventNameEl) return;
 
-    // 🎯 CEREMONY UPDATE
-    if (eventName === "Ceremony") {
+      const eventName = eventNameEl.textContent.trim();
 
-      // Date
-      const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
-      if (date) date.textContent = "Wednesday, May 27th 2026";
+      // 🎯 CEREMONY
+      if (eventName === "Ceremony") {
 
-      // Venue
-      const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
-      if (venue) venue.textContent = "St. Anthonyy's Shrine, Coonoor";
+        const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
+        if (date && date.textContent !== "Wednesday, May 27th 2026") {
+          date.textContent = "Wednesday, May 27th 2026";
+        }
 
-      // Time
-      const time = card.querySelector('[data-framer-name="Time"] .framer-text');
-      if (time) time.textContent = "3:00 PM";
+        const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
+        if (venue && venue.textContent !== "St. Anthonyy's Shrine, Coonoor") {
+          venue.textContent = "St. Anthonyy's Shrine, Coonoor";
+        }
 
-      // Attire
-      const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
-      if (attire) attire.textContent = "Traditional / Formal";
+        const time = card.querySelector('[data-framer-name="Time"] .framer-text');
+        if (time && time.textContent !== "3:00 PM") {
+          time.textContent = "3:00 PM";
+        }
 
-    }
+        const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
+        if (attire && attire.textContent !== "Traditional / Formal") {
+          attire.textContent = "Traditional / Formal";
+        }
 
-    // 🎯 RECEPTION UPDATE
-    if (eventName === "Reception") {
+      }
 
-      const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
-      if (date) date.textContent = "Wednesday, May 27th 2026";
+      // 🎯 RECEPTION
+      if (eventName === "Reception") {
 
-      const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
-      if (venue) venue.textContent = "Orange Grove Road, Coonoor";
+        const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
+        if (date && date.textContent !== "Wednesday, May 27th 2026") {
+          date.textContent = "Wednesday, May 27th 2026";
+        }
 
-      const time = card.querySelector('[data-framer-name="Time"] .framer-text');
-      if (time) time.textContent = "5:30 PM to 8:30 PM";
+        const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
+        if (venue && venue.textContent !== "Orange Grove Road, Coonoor") {
+          venue.textContent = "Orange Grove Road, Coonoor";
+        }
 
-      const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
-      if (attire) attire.textContent = "Evening Formal";
+        const time = card.querySelector('[data-framer-name="Time"] .framer-text');
+        if (time && time.textContent !== "5:30 PM to 8:30 PM") {
+          time.textContent = "5:30 PM to 8:30 PM";
+        }
 
-    }
+        const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
+        if (attire && attire.textContent !== "Evening Formal") {
+          attire.textContent = "Evening Formal";
+        }
 
+      }
+
+    });
+
+  };
+
+  // Run immediately
+  updateEvents();
+
+  // Watch for Framer re-render
+  const observer = new MutationObserver(updateEvents);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("Mirko Rastovic")) {
-      el.textContent = el.textContent.replace("Mirko Rastovic", "John Mario");
-    }
+  const replaceName = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.includes("Mirko Rastovic")) {
+        el.textContent = el.textContent.replace("Mirko Rastovic", "John Mario");
+      }
+    });
+  };
+
+  // Run immediately
+  replaceName();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(replaceName);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 <style>
@@ -5850,72 +5977,131 @@ a.framer-styles-preset-thf6wm {
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  const img = document.querySelector('img[src*="FMx33N0QNZEN9o98413jFSazlw.png"]');
-  
-  if (img) {
+  const wrapImage = () => {
+
+    const img = document.querySelector('img[src*="FMx33N0QNZEN9o98413jFSazlw.png"]');
+    if (!img) return;
+
+    // If already wrapped, skip
+    if (img.closest("a[href*='maps.app.goo.gl']")) return;
+
     const link = document.createElement("a");
     link.href = "https://maps.app.goo.gl/6DCsqukGZu6qpDmx6";
     link.target = "_blank";
 
     img.parentNode.insertBefore(link, img);
     link.appendChild(img);
-  }
+  };
 
-}, 1000);
+  // Run immediately
+  wrapImage();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(wrapImage);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  const link = document.querySelector('[data-framer-name="WhatsApp Icon"]');
-  if (link) {
-    link.href = "https://wa.me/17057721535";
-  }
+  const updateLink = () => {
+    const link = document.querySelector('[data-framer-name="WhatsApp Icon"]');
+    
+    if (link && link.href !== "https://wa.me/17057721535") {
+      link.href = "https://wa.me/17057721535";
+      link.target = "_blank";
+    }
+  };
 
-}, 1000);
+  // Run immediately
+  updateLink();
+
+  // Watch for Framer re-render
+  const observer = new MutationObserver(updateLink);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 <!-- Hide the "Attire" section -->
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.trim() === "Attire") {
+  const hideAttire = () => {
+    const el = document.querySelector('[data-framer-name="Hashtag"] .framer-text');
+    if (el && el.textContent.trim() === "Attire") {
       const section = el.closest('.framer-18k7y2c-container');
       if (section) section.style.display = "none";
     }
-  });
+  };
 
-}, 1000);
+  hideAttire();
+
+  const observer = new MutationObserver(hideAttire);
+  observer.observe(document.body, { childList: true, subtree: true });
+
+})();
 </script>
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("Valet parking for all our guests")) {
-      el.textContent = "Parking for all our guests will be available at the venue";
-    }
+  const replaceText = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.includes("Valet parking for all our guests")) {
+        el.textContent = "Parking for all our guests will be available at the venue";
+      }
+    });
+  };
+
+  // Run immediately
+  replaceText();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(replaceText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
-</script> 
+})();
+</script>
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('.framer-text').forEach(el => {
-    if (el.textContent.includes("@joshua8")) {
-      el.textContent = "We request you tag us when you post on Instagram";
-    }
+  const replaceText = () => {
+    document.querySelectorAll('.framer-text').forEach(el => {
+      if (el.textContent.includes("@joshua8")) {
+        el.textContent = "We request you tag us when you post on Instagram";
+      }
+    });
+  };
+
+  // Run immediately
+  replaceText();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(replaceText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
+})();
 </script>
 
 <script>
@@ -5932,60 +6118,72 @@ setInterval(removeCopyright, 500);
 
 
 <script>
-setTimeout(() => {
+(function () {
 
-  const link = document.querySelector('[data-framer-name="Instagram Icon"]');
-  if (link) {
-    link.href = "https://www.instagram.com/kavin_n_g/";
-  }
+  const updateLink = () => {
+    const link = document.querySelector('[data-framer-name="Instagram Icon"]');
+    
+    if (link && link.href !== "https://www.instagram.com/kavin_n_g/") {
+      link.href = "https://www.instagram.com/kavin_n_g/";
+      link.target = "_blank";
+    }
+  };
 
-}, 1000);
+  // Run immediately
+  updateLink();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(updateLink);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 
 <!-- replace slider images -->
 <script>
-setTimeout(() => {
+(function () {
 
-  document.querySelectorAll('img[src*="SdIUakYEIKxJCq0s01mrWj4BKQo"]').forEach(img => {
-    img.src = "images/1-img.jpg";
-    img.srcset = "images/1-img.jpg";
+  const imageMap = {
+    "SdIUakYEIKxJCq0s01mrWj4BKQo": "images/1-img.jpg",
+    "aChwehMvk5FZArKT2uepPFSzLc": "images/2-img.jpg",
+    "0Kj3SYeVnofFFPYZupnBgL8iF4": "images/3-img.jpg",
+    "C4uVdaa65I6JQXJENtPLtXzAzm4": "images/4-img.jpg"
+  };
+
+  const replaceImages = () => {
+
+    Object.keys(imageMap).forEach(key => {
+
+      document.querySelectorAll(`img[src*="${key}"]`).forEach(img => {
+
+        const newSrc = imageMap[key];
+
+        // Prevent unnecessary updates
+        if (!img.src.includes(newSrc)) {
+          img.src = newSrc;
+          img.srcset = newSrc;
+        }
+
+      });
+
+    });
+
+  };
+
+  // Run immediately
+  replaceImages();
+
+  // Watch for Framer re-render
+  const observer = new MutationObserver(replaceImages);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
-}, 1000);
-</script>
-
-
-<script>
-setTimeout(() => {
-
-  document.querySelectorAll('img[src*="aChwehMvk5FZArKT2uepPFSzLc"]').forEach(img => {
-    img.src = "images/2-img.jpg";
-    img.srcset = "images/2-img.jpg";
-  });
-
-}, 1000);
-</script>
-
-<script>
-setTimeout(() => {
-
-  document.querySelectorAll('img[src*="0Kj3SYeVnofFFPYZupnBgL8iF4"]').forEach(img => {
-    img.src = "images/3-img.jpg";
-    img.srcset = "images/3-img.jpg";
-  });
-
-}, 1000);
-</script>
-
-<script>
-setTimeout(() => {
-
-  document.querySelectorAll('img[src*="C4uVdaa65I6JQXJENtPLtXzAzm4"]').forEach(img => {
-    img.src = "images/4-img.jpg";
-    img.srcset = "images/4-img.jpg";
-  });
-
-}, 1000);
+})();
 </script>
 
 
@@ -6012,8 +6210,9 @@ setTimeout(() => {
 
   function startCounter(el) {
 
-    if (el.dataset.running) return; // prevent duplicate
-    el.dataset.running = "true";
+    // Prevent duplicate intervals
+    if (el.dataset.counterAttached) return;
+    el.dataset.counterAttached = "true";
 
     function update() {
       const now = Date.now();
@@ -6025,27 +6224,29 @@ setTimeout(() => {
     setInterval(update, 1000);
   }
 
-  function findCounter() {
+  function findAndAttach() {
+
     document.querySelectorAll("p").forEach(p => {
 
       const text = p.innerText.trim();
 
-      // 🔥 flexible match
-      if (/^\d{2}:\d{2}:\d{2}:\d{2}$/.test(text) || text.includes("00:00")) {
+      // Match countdown format OR placeholder
+      if (
+        /^\d{2}:\d{2}:\d{2}:\d{2}$/.test(text) ||
+        text === "00:00:00:00"
+      ) {
         startCounter(p);
       }
 
     });
+
   }
 
-  // run multiple times
-  setTimeout(findCounter, 500);
-  setTimeout(findCounter, 1500);
-  setTimeout(findCounter, 3000);
+  // Run immediately
+  findAndAttach();
 
-  // observe dynamic rendering
-  const observer = new MutationObserver(findCounter);
-
+  // Watch Framer DOM updates
+  const observer = new MutationObserver(findAndAttach);
   observer.observe(document.body, {
     childList: true,
     subtree: true
@@ -9898,7 +10099,7 @@ setTimeout(() => {
 
   <script>
 // Disable right click
-document.addEventListener("contextmenu", e => e.preventDefault());
+// document.addEventListener("contextmenu", e => e.preventDefault());
 
 // Disable key shortcuts
 document.addEventListener("keydown", function (e) {
