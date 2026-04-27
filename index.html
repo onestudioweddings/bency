@@ -5943,6 +5943,39 @@ a[href="https://rzp.io/rzp/whimsical"] {
 </script>
 
 
+<script>
+(function () {
+
+  const updateText = () => {
+
+    const container = document.querySelector('.framer-18f5ri7-container');
+    if (!container) return;
+
+    const el = container.querySelector('.framer-text');
+
+    if (
+      el &&
+      el.textContent.includes("Mittal family") &&
+      el.textContent !== "We are excited that you can join us in celebrating one of the happiest days of our lives."
+    ) {
+      el.textContent = "We are excited that you can join us in celebrating one of the happiest days of our lives.";
+    }
+
+  };
+
+  // Run immediately
+  updateText();
+
+  // Watch for Framer updates
+  const observer = new MutationObserver(updateText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
+</script>
+
 
 <script>
 (function () {
