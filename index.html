@@ -5686,6 +5686,46 @@ setTimeout(() => {
 
   document.querySelectorAll('.framer-text').forEach(el => {
     if (el.textContent.includes("Thomas and Mary")) {
+      el.textContent = "Mrs. Annie Christi and Mr. Sundar L";
+    }
+  });
+
+}, 1000);
+</script>
+
+
+<!-- replace son daughter-->
+<script>
+setTimeout(() => {
+
+  document.querySelectorAll('.framer-text').forEach(el => {
+    if (el.textContent.trim() === "At the marriage of their son") {
+      el.textContent = "At the marriage of their daughter";
+    }
+  });
+
+}, 1000);
+</script>
+
+
+<script>
+setTimeout(() => {
+
+  document.querySelectorAll('.framer-text').forEach(el => {
+    if (el.textContent.includes("Mirko Rastovic")) {
+      el.textContent = el.textContent.replace("Mirko Rastovic", "GanapathiKumar");
+    }
+  });
+
+}, 1000);
+</script>
+
+
+<script>
+setTimeout(() => {
+
+  document.querySelectorAll('.framer-text').forEach(el => {
+    if (el.textContent.includes("Thomas and Mary")) {
       el.textContent = "Mr. and Mrs. Justin and Illeana";
     }
   });
