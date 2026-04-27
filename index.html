@@ -5720,6 +5720,86 @@ setTimeout(() => {
 }, 1000);
 </script>
 
+<!-- hide events -->
+<script>
+setTimeout(() => {
+
+  document.querySelectorAll('.framer-text').forEach(el => {
+    const text = el.textContent.trim();
+
+    if (
+      text === "Welcome Party" ||
+      text === "Opera Night" ||
+      text === "Cocktail"
+    ) {
+      // hide entire card
+      let card = el.closest('[data-framer-name="Variant 1"]');
+      if (card) {
+        card.style.display = "none";
+      }
+    }
+  });
+
+}, 1000);
+</script>
+
+
+
+<!-- Update event details -->
+<script>
+setTimeout(() => {
+
+  document.querySelectorAll('[data-framer-name="Variant 1"]').forEach(card => {
+
+    const eventNameEl = card.querySelector('[data-framer-name="Event name"] .framer-text');
+    if (!eventNameEl) return;
+
+    const eventName = eventNameEl.textContent.trim();
+
+    // 🎯 CEREMONY UPDATE
+    if (eventName === "Ceremony") {
+
+      // Date
+      const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
+      if (date) date.textContent = "Wednesday, May 27th 2026";
+
+      // Venue
+      const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
+      if (venue) venue.textContent = "St. Anthonyy's Shrine, Coonoor";
+
+      // Time
+      const time = card.querySelector('[data-framer-name="Time"] .framer-text');
+      if (time) time.textContent = "3:00 PM";
+
+      // Attire
+      const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
+      if (attire) attire.textContent = "Traditional / Formal";
+
+    }
+
+    // 🎯 RECEPTION UPDATE
+    if (eventName === "Reception") {
+
+      const date = card.querySelector('[data-framer-name="Date and day"] .framer-text');
+      if (date) date.textContent = "Wednesday, May 27th 2026";
+
+      const venue = card.querySelector('[data-framer-name="Venue"] .framer-text');
+      if (venue) venue.textContent = "Orange Grove Road, Coonoor";
+
+      const time = card.querySelector('[data-framer-name="Time"] .framer-text');
+      if (time) time.textContent = "5:30 PM to 8:30 PM";
+
+      const attire = card.querySelector('[data-framer-name="Attire"] .framer-text');
+      if (attire) attire.textContent = "Evening Formal";
+
+    }
+
+  });
+
+}, 1000);
+</script>
+
+
 
 <script>
 setTimeout(() => {
